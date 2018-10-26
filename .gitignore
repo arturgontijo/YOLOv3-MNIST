@@ -1,5 +1,6 @@
 *.jpg
 *.jpeg
 *.png
+/data/*
 /darknet/*
 /models/*
