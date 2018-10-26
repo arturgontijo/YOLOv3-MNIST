@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import numpy as np
 import cv2
 import os
@@ -59,5 +56,5 @@ for file in t:
     curr_file = file.split("/")[-1]
     os.rename(curr_file, file)
 
-conv_mnist(t[0], t[1], 10000, img_path, "data/mnist/mnist.valid.list", "v")
-conv_mnist(t[2], t[3], 60000, img_path, "data/mnist/mnist.train.list", "t")
+conv_mnist(t[0], t[1], 10000, images_path, "data/mnist/mnist.valid.list", "v")
+conv_mnist(t[2], t[3], 60000, images_path, "data/mnist/mnist.train.list", "t")

@@ -11,7 +11,7 @@ pip3 install -r requirements.txt
 
 Preparing the MNIST Dataset:
 ```
-python3 utils/download_and_convert_mnist.py
+python3 utils/prepare_database.py
 python3 -c 'import utils.mnist_labels as m; m.resize(new_size=(416, 416), invert=True); m.gen_labels(size=(416, 416))'
 ```
 
