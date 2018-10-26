@@ -32,13 +32,14 @@ data_files = ["train-images-idx3-ubyte.gz",
               "t10k-images-idx3-ubyte.gz",
               "t10k-labels-idx1-ubyte.gz"]
 
-for data_file in data_files:
-    os.system('curl -O http://yann.lecun.com/exdb/mnist/' + data_file)
-    os.system('gunzip ' + data_file)
-
 cwd = os.getcwd()
-mnist_folder = cwd + "data/mnist"
-img_path = cwd + "data/mnist/images"
+for data_file in data_files:
+    if not os.path.exists(cwd + "/" + data_file):
+        os.system('curl -O http://yann.lecun.com/exdb/mnist/' + data_file)
+        os.system('gunzip ' + data_file)
+
+mnist_folder = cwd + "/data/mnist"
+img_path = cwd + "/data/mnist/images"
 
 if not os.path.exists(img_path):
     if not os.path.exists(mnist_folder):
