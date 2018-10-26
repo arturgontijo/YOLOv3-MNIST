@@ -34,8 +34,9 @@ data_files = ["train-images-idx3-ubyte.gz",
 
 cwd = os.getcwd()
 for data_file in data_files:
-    if not os.path.exists(cwd + "/" + data_file):
-        os.system('curl -O http://yann.lecun.com/exdb/mnist/' + data_file)
+    data_path = cwd + "/data/" + data_file
+    if not os.path.exists(data_path):
+        os.system('curl -O {} http://yann.lecun.com/exdb/mnist/'.format(data_path, data_file))
         os.system('gunzip ' + data_file)
 
 mnist_folder = cwd + "/data/mnist"
