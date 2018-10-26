@@ -42,8 +42,8 @@ img_path = cwd + "data/mnist/images"
 
 if not os.path.exists(img_path):
     if not os.path.exists(mnist_folder):
-        os.mkdir("data/mnist")
-    os.mkdir("data/mnist/images")
+        os.mkdir(mnist_folder)
+    os.mkdir(img_path)
 
 conv_mnist("t10k-images-idx3-ubyte", "t10k-labels-idx1-ubyte", 10000, img_path, "mnist.valid.list","v")
 conv_mnist("train-images-idx3-ubyte", "train-labels-idx1-ubyte", 60000, img_path, "mnist.train.list","t")
