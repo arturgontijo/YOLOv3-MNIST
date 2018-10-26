@@ -5,30 +5,31 @@ import numpy as np
 import cv2
 import os
 
+
 def conv_mnist(img_file,label_file, num, path, list,label):
 
-    imgs=open(img_file,"rb").read()
-    imgs=np.fromstring(imgs,dtype=np.uint8)
-    imgs=imgs[16:] # skip header
-    imgs=imgs.reshape((num,28,28))
+    imgs = open(img_file, "rb").read()
+    imgs = np.fromstring(imgs, dtype=np.uint8)
+    imgs = imgs[16:]
+    imgs = imgs.reshape((num, 28, 28))
 
-    labels=open(label_file,"rb").read()
-    labels=np.fromstring(labels,dtype=np.uint8)
-    labels=labels[8:] # skip header
+    labels = open(label_file,"rb").read()
+    labels = np.fromstring(labels, dtype=np.uint8)
+    labels = labels[8:] # skip header
 
-    fw=open(list,"w")
+    fw = open(list, "w")
     for i in range(num):
         class_id = labels[i]
-        img_name = "%s_%05d_c%d.png" % (label,i,class_id)
-        img_path = path+"/"+img_name
-        cv2.imwrite(img_path,imgs[i])
-        fw.write(img_path+"\n")
+        img_name = "%s_%05d_c%d.png" % (label, i, class_id)
+        img_path = path + "/" + img_name
+        cv2.imwrite(img_path, imgs[i])
+        fw.write(img_path + "\n")
     fw.close()
 
 data_files=["train-images-idx3-ubyte.gz",
-"train-labels-idx1-ubyte.gz",
-"t10k-images-idx3-ubyte.gz",
-"t10k-labels-idx1-ubyte.gz"]
+            "train-labels-idx1-ubyte.gz",
+            "t10k-images-idx3-ubyte.gz",
+            "t10k-labels-idx1-ubyte.gz"]
 
 for data_file in data_files:
     os.system('curl -O http://yann.lecun.com/exdb/mnist/'+data_file)
