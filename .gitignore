@@ -3,5 +3,6 @@
 *.png
 /data/*
 /darknet/*
+!/darknet/.keep
 /models/*
 !*/.gitignore
