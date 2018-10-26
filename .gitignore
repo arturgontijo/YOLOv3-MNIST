@@ -4,4 +4,4 @@
 /data/*
 /darknet/*
 /models/*
-!/.gitignore
+!*/.gitignore
