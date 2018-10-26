@@ -26,20 +26,24 @@ def conv_mnist(img_file,label_file, num, path, list,label):
         fw.write(img_path + "\n")
     fw.close()
 
-data_files=["train-images-idx3-ubyte.gz",
-            "train-labels-idx1-ubyte.gz",
-            "t10k-images-idx3-ubyte.gz",
-            "t10k-labels-idx1-ubyte.gz"]
+
+data_files = ["train-images-idx3-ubyte.gz",
+              "train-labels-idx1-ubyte.gz",
+              "t10k-images-idx3-ubyte.gz",
+              "t10k-labels-idx1-ubyte.gz"]
 
 for data_file in data_files:
-    os.system('curl -O http://yann.lecun.com/exdb/mnist/'+data_file)
-    os.system('gunzip '+data_file)
+    os.system('curl -O http://yann.lecun.com/exdb/mnist/' + data_file)
+    os.system('gunzip ' + data_file)
 
 cwd = os.getcwd()
-img_path=cwd+"/images"
+mnist_folder = cwd + "data/mnist"
+img_path = cwd + "data/mnist/images"
 
 if not os.path.exists(img_path):
-    os.mkdir("images")
+    if not os.path.exists(mnist_folder):
+        os.mkdir("data/mnist")
+    os.mkdir("data/mnist/images")
 
 conv_mnist("t10k-images-idx3-ubyte", "t10k-labels-idx1-ubyte", 10000, img_path, "mnist.valid.list","v")
 conv_mnist("train-images-idx3-ubyte", "train-labels-idx1-ubyte", 60000, img_path, "mnist.train.list","t")
