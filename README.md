@@ -15,7 +15,11 @@ git clone https://github.com/pjreddie/darknet.git
 
 Compile Darknet (edit Makefile to use GPU, CUDNN and OPENCV).
 
-After you got the `darknet` binary:
+After you got the `darknet` binary, download the Pretrained Convolutional Weights:
+
+```
+wget https://pjreddie.com/media/files/darknet53.conv.74
+```
 
 - Train:
 ```

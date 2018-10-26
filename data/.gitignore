@@ -1,2 +1,4 @@
 *
+!/mnist.labels.list
+!/mnist.names.list
 !/.gitignore
