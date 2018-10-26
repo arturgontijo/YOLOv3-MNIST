@@ -1,5 +1,5 @@
 classes= 10
-train  = data/mnist/mnist.train.list
-valid  = data/mnist/mnist.valid.list
-names  = data/mnist/mnist.names.list
-backup = models
+train  = ../data/mnist/mnist.train.list
+valid  = ../data/mnist/mnist.valid.list
+names  = ../data/mnist/mnist.names.list
+backup = ../models

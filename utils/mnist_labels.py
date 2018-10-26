@@ -3,7 +3,7 @@ import glob
 import re
 
 
-def labels_64_64(size=(64, 64)):
+def gen_labels(size=(64, 64)):
     img_files = glob.glob("./data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):

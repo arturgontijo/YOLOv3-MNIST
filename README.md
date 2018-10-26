@@ -6,6 +6,13 @@ Clone this Repo:
 ```
 git clone https://github.com/arturgontijo/YOLOv3-MNIST.git
 cd YOLOv3-MNIST
+pip3 install -r requirements.txt
+```
+
+Preparing the MNIST Dataset:
+```
+python3 utils/download_and_convert_mnist.py
+python3 -c 'import utils.mnist_labels as m; m.resize(new_size=(416, 416), invert=True); m.gen_labels(size=(416, 416))'
 ```
 
 Clone Darknet Repo:
@@ -23,10 +30,11 @@ wget https://pjreddie.com/media/files/darknet53.conv.74
 
 - Train:
 ```
-./darknet/darknet detector train cfg/mnist.dataset cfg/yolov3_mnist.cfg darknet53.conv.74
+cd darknet
+./darknet detector train ../cfg/mnist.dataset ../cfg/yolov3_mnist.cfg ../darknet53.conv.74
 ```
 
 - Test:
 ```
-./darknet/darknet detect cfg/yolov3_mnist.cfg models/yolov3_mnist.backup IMAGE_PATH
+./darknet detector test ../cfg/mnist.dataset ../cfg/yolov3_mnist.cfg ../models/yolov3_mnist.backup IMAGE_PATH -i 0 -thresh 0.5
 ```

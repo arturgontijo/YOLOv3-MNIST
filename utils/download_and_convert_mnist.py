@@ -30,12 +30,14 @@ def conv_mnist(img_file, label_file, num, path, list_file, label):
 cwd = os.getcwd()
 
 mnist_folder = cwd + "/data/mnist"
-img_path = cwd + "/data/mnist/images"
+images_path = cwd + "/data/mnist/images"
+labels_path = cwd + "/data/mnist/labels"
 
-if not os.path.exists(img_path):
+if not os.path.exists(images_path):
     if not os.path.exists(mnist_folder):
         os.mkdir(mnist_folder)
-    os.mkdir(img_path)
+    os.mkdir(images_path)
+    os.mkdir(labels_path)
 
 t = [cwd + "/data/" + "t10k-images-idx3-ubyte",
      cwd + "/data/" + "t10k-labels-idx1-ubyte",
