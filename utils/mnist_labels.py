@@ -3,28 +3,21 @@ import glob
 import re
 
 
-def gen_labels(size=(64, 64)):
+def enlarge(basewidth=392):
     img_files = glob.glob("./data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
-        x = 0.5
-        y = 0.5
-        w = 28 / size[0]
-        h = 28 / size[1]
-        m = re.search('(\_c)([0-9])', file_path)
-        c = m.group(2)
-        # <object-class> <x> <y> <width> <height>
-        #        c        x   y     w       h
+        img = Image.open(file_path)
+        wpercent = (basewidth / float(img.size[0]))
+        hsize = int((float(img.size[1]) * float(wpercent)))
+        img = img.resize((basewidth, hsize), Image.ANTIALIAS)
         txt_name = file_path.split("/")[-1]
-        txt_name = txt_name.split(".")[0] + ".txt"
-        txt_path = "./data/mnist/labels/{}".format(txt_name)
-        with open(txt_path, "w") as f:
-            data = "{} {} {} {} {}".format(c, x, y, w, h)
-            f.write(data)
-            print("[{}/{}] {} done!".format(idx, tam, txt_path))
+        txt_name = txt_name.split(".")[0] + "_{}.jpg".format(basewidth)
+        img.save(txt_name, "JPEG")
+        print("[{}/{}] {} done!".format(idx, tam, file_path))
 
 
-def resize(new_size=(64, 64), invert=False):
+def resize_invert(new_size=(64, 64), invert=False):
     img_files = glob.glob("./data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
@@ -36,3 +29,26 @@ def resize(new_size=(64, 64), invert=False):
             im = ImageOps.invert(im)
         im.save(file_path, "JPEG")
         print("[{}/{}] {} done!".format(idx, tam, file_path))
+
+
+def gen_labels(size=(64, 64)):
+    img_files = glob.glob("./data/mnist/images/*.png")
+    tam = len(img_files)
+    for idx, file_path in enumerate(img_files):
+        img = Image.open(file_path)
+        img_size = img.size
+        x = 0.5
+        y = 0.5
+        w = img_size[0] / size[0]
+        h = img_size[1] / size[1]
+        m = re.search('(\_c)([0-9])', file_path)
+        c = m.group(2)
+        # <object-class> <x> <y> <width> <height>
+        #        c        x   y     w       h
+        txt_name = file_path.split("/")[-1]
+        txt_name = txt_name.split(".")[0] + ".txt"
+        txt_path = "./data/mnist/labels/{}".format(txt_name)
+        with open(txt_path, "w") as f:
+            data = "{} {} {} {} {}".format(c, x, y, w, h)
+            f.write(data)
+            print("[{}/{}] {} done!".format(idx, tam, txt_path))
