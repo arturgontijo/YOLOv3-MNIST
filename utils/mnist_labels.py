@@ -3,6 +3,7 @@ import glob
 import re
 
 
+# ./data/mnist/images/t_50227_c7.png
 def enlarge(basewidth=392):
     img_files = glob.glob("./data/mnist/images/*.png")
     tam = len(img_files)
@@ -11,9 +12,8 @@ def enlarge(basewidth=392):
         wpercent = (basewidth / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
         img = img.resize((basewidth, hsize), Image.ANTIALIAS)
-        txt_name = file_path.split("/")[-1]
-        txt_name = txt_name.split(".")[0] + "_{}.jpg".format(basewidth)
-        img.save(txt_name, "JPEG")
+        out_name = file_path.split(".")[0] + "_{}.jpg".format(basewidth)
+        img.save(out_name, "JPEG")
         print("[{}/{}] {} done!".format(idx, tam, file_path))
 
 
