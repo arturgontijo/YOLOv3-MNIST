@@ -17,9 +17,9 @@ def conv_mnist(img_file, label_file, num, path, list_file, label):
     fw = open(list_file, "w")
     for i in range(num):
         class_id = labels[i]
-        img_name = "%s_%05d_c%d.png" % (label, i, class_id)
+        img_name = "%s_%05d_c%d.jpg" % (label, i, class_id)
         img_path = path + "/" + img_name
-        cv2.imwrite(img_path, imgs[i])
+        cv2.imwrite(img_path, imgs[i], [int(cv2.IMWRITE_JPEG_QUALITY), 90])
         fw.write(img_path + "\n")
     fw.close()
 

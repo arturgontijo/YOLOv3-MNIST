@@ -4,21 +4,23 @@ import re
 
 
 # data/mnist/images/t_50227_c7.png
-def enlarge(basewidth=392):
-    img_files = glob.glob("data/mnist/images/*.png")
+def enlarge(basewidth=[56, 112, 224, 392]):
+    img_files = glob.glob("data/mnist/images/*.jpg")
     tam = len(img_files)
-    for idx, file_path in enumerate(img_files):
-        img = Image.open(file_path)
-        wpercent = (basewidth / float(img.size[0]))
-        hsize = int((float(img.size[1]) * float(wpercent)))
-        img = img.resize((basewidth, hsize), Image.ANTIALIAS)
-        out_name = file_path.split(".")[0] + "_{}.png".format(basewidth)
-        img.save(out_name, "JPEG")
-        print("[{}/{}] {} done!".format(idx, tam, out_name))
+    full_tam = tam * (len(basewidth) + 1)
+    for i, bw in basewidth:
+        for idx, file_path in enumerate(img_files):
+            img = Image.open(file_path)
+            wpercent = (bw / float(img.size[0]))
+            hsize = int((float(img.size[1]) * float(wpercent)))
+            img = img.resize((bw, hsize), Image.ANTIALIAS)
+            out_name = file_path.split(".")[0] + "_{}.jpg".format(bw)
+            img.save(out_name, "JPEG")
+            print("[{}/{}] {} done!".format(idx + (i * tam), full_tam, out_name))
 
 
-def resize_invert(new_size=(64, 64), invert=False):
-    img_files = glob.glob("data/mnist/images/*.png")
+def resize_invert(new_size=(416, 416), invert=False):
+    img_files = glob.glob("data/mnist/images/*.jpg")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
         old_im = Image.open(file_path)
@@ -31,8 +33,8 @@ def resize_invert(new_size=(64, 64), invert=False):
         print("[{}/{}] {} done!".format(idx, tam, file_path))
 
 
-def gen_labels(size=(64, 64)):
-    img_files = glob.glob("data/mnist/images/*.png")
+def gen_labels(size=(416, 416)):
+    img_files = glob.glob("data/mnist/images/*.jpg")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
         bbox_size = file_path.split("/")[-1]
