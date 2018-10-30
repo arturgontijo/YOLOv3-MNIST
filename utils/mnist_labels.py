@@ -4,7 +4,9 @@ import re
 
 
 # data/mnist/images/t_50227_c7.png
-def enlarge(basewidth=[56, 112, 224, 392]):
+def enlarge(basewidth=None):
+    if not basewidth:
+        basewidth = [56, 112, 224, 392]
     img_files = glob.glob("data/mnist/images/*.jpg")
     tam = len(img_files)
     full_tam = tam * (len(basewidth) + 1)
