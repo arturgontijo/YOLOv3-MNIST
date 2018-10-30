@@ -3,9 +3,9 @@ import glob
 import re
 
 
-# ./data/mnist/images/t_50227_c7.png
+# data/mnist/images/t_50227_c7.png
 def enlarge(basewidth=392):
-    img_files = glob.glob("./data/mnist/images/*.png")
+    img_files = glob.glob("data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
         img = Image.open(file_path)
@@ -14,11 +14,11 @@ def enlarge(basewidth=392):
         img = img.resize((basewidth, hsize), Image.ANTIALIAS)
         out_name = file_path.split(".")[0] + "_{}.jpg".format(basewidth)
         img.save(out_name, "JPEG")
-        print("[{}/{}] {} done!".format(idx, tam, file_path))
+        print("[{}/{}] {} done!".format(idx, tam, out_name))
 
 
 def resize_invert(new_size=(64, 64), invert=False):
-    img_files = glob.glob("./data/mnist/images/*.png")
+    img_files = glob.glob("data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
         old_im = Image.open(file_path)
@@ -32,7 +32,7 @@ def resize_invert(new_size=(64, 64), invert=False):
 
 
 def gen_labels(size=(64, 64)):
-    img_files = glob.glob("./data/mnist/images/*.png")
+    img_files = glob.glob("data/mnist/images/*.png")
     tam = len(img_files)
     for idx, file_path in enumerate(img_files):
         img = Image.open(file_path)
